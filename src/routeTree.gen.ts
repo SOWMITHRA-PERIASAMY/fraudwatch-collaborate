@@ -10,11 +10,26 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CollaborationRouteImport } from './routes/collaboration'
+import { Route as GuideRouteImport } from './routes/guide'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as ResultsRouteImport } from './routes/results'
+import { Route as SimulationRouteImport } from './routes/simulation'
+import { Route as VivaRouteImport } from './routes/viva'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollaborationRoute = CollaborationRouteImport.update({
+  id: '/collaboration',
+  path: '/collaboration',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuideRoute = GuideRouteImport.update({
+  id: '/guide',
+  path: '/guide',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HowItWorksRoute = HowItWorksRouteImport.update({
@@ -22,31 +37,88 @@ const HowItWorksRoute = HowItWorksRouteImport.update({
   path: '/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResultsRoute = ResultsRouteImport.update({
+  id: '/results',
+  path: '/results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SimulationRoute = SimulationRouteImport.update({
+  id: '/simulation',
+  path: '/simulation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VivaRoute = VivaRouteImport.update({
+  id: '/viva',
+  path: '/viva',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/collaboration': typeof CollaborationRoute
+  '/guide': typeof GuideRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/results': typeof ResultsRoute
+  '/simulation': typeof SimulationRoute
+  '/viva': typeof VivaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/collaboration': typeof CollaborationRoute
+  '/guide': typeof GuideRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/results': typeof ResultsRoute
+  '/simulation': typeof SimulationRoute
+  '/viva': typeof VivaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/collaboration': typeof CollaborationRoute
+  '/guide': typeof GuideRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/results': typeof ResultsRoute
+  '/simulation': typeof SimulationRoute
+  '/viva': typeof VivaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/how-it-works'
+  fullPaths:
+    | '/'
+    | '/collaboration'
+    | '/guide'
+    | '/how-it-works'
+    | '/results'
+    | '/simulation'
+    | '/viva'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/how-it-works'
-  id: '__root__' | '/' | '/how-it-works'
+  to:
+    | '/'
+    | '/collaboration'
+    | '/guide'
+    | '/how-it-works'
+    | '/results'
+    | '/simulation'
+    | '/viva'
+  id:
+    | '__root__'
+    | '/'
+    | '/collaboration'
+    | '/guide'
+    | '/how-it-works'
+    | '/results'
+    | '/simulation'
+    | '/viva'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CollaborationRoute: typeof CollaborationRoute
+  GuideRoute: typeof GuideRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  ResultsRoute: typeof ResultsRoute
+  SimulationRoute: typeof SimulationRoute
+  VivaRoute: typeof VivaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +130,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/collaboration': {
+      id: '/collaboration'
+      path: '/collaboration'
+      fullPath: '/collaboration'
+      preLoaderRoute: typeof CollaborationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guide': {
+      id: '/guide'
+      path: '/guide'
+      fullPath: '/guide'
+      preLoaderRoute: typeof GuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/how-it-works': {
       id: '/how-it-works'
       path: '/how-it-works'
@@ -65,12 +151,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HowItWorksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/results': {
+      id: '/results'
+      path: '/results'
+      fullPath: '/results'
+      preLoaderRoute: typeof ResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/simulation': {
+      id: '/simulation'
+      path: '/simulation'
+      fullPath: '/simulation'
+      preLoaderRoute: typeof SimulationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/viva': {
+      id: '/viva'
+      path: '/viva'
+      fullPath: '/viva'
+      preLoaderRoute: typeof VivaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CollaborationRoute: CollaborationRoute,
+  GuideRoute: GuideRoute,
   HowItWorksRoute: HowItWorksRoute,
+  ResultsRoute: ResultsRoute,
+  SimulationRoute: SimulationRoute,
+  VivaRoute: VivaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

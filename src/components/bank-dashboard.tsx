@@ -34,7 +34,7 @@ export function BankDashboard({ bankId, onBack }: { bankId: BankId; onBack: () =
     () => bank.transactions.filter((t) => verdicts[t.id] === "SUSPICIOUS").length,
     [bank.transactions, verdicts],
   );
-  const tx = bank.transactions[index];
+  const tx = bank.transactions[index]!;
   const submitted = state.indicators[bankId];
 
   if (showPrivacy) return <PrivacyView bankId={bankId} />;
@@ -110,7 +110,8 @@ export function BankDashboard({ bankId, onBack }: { bankId: BankId; onBack: () =
               variant={verdicts[tx.id] === "NORMAL" ? "default" : "outline"}
               className={cn(
                 "h-12",
-                verdicts[tx.id] === "NORMAL" && "bg-success text-success-foreground hover:bg-success/90",
+                verdicts[tx.id] === "NORMAL" &&
+                  "bg-success text-success-foreground hover:bg-success/90",
               )}
               onClick={() => {
                 setVerdict(bankId, tx.id, "NORMAL");
@@ -137,7 +138,12 @@ export function BankDashboard({ bankId, onBack }: { bankId: BankId; onBack: () =
           </div>
         </div>
         <div className="flex items-center justify-between border-t border-border px-6 py-3">
-          <Button variant="ghost" size="sm" disabled={index === 0} onClick={() => setIndex(index - 1)}>
+          <Button
+            variant="ghost"
+            size="sm"
+            disabled={index === 0}
+            onClick={() => setIndex(index - 1)}
+          >
             <ChevronLeft className="size-4" /> Previous
           </Button>
           <div className="flex gap-1.5">
